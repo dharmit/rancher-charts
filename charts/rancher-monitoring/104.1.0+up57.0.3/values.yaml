@@ -484,7 +484,7 @@ rke2IngressNginx:
         enabled: true
       service:
         selector: false
-
+  networkPolicyEnabled: false
 
 
 ## Additional PushProx Monitoring
