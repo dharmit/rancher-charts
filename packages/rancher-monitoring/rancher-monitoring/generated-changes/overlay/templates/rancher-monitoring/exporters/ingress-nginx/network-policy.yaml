@@ -1,0 +1,19 @@
+{{- if .Values.rke2IngressNginx.networkPolicyEnabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations:
+    np.rke2.io/ingress: resolved
+  name: rke2-ingress-network-policy
+  namespace: {{ .Values.rke2IngressNginx.namespaceOverride }}
+spec:
+  ingress:
+    - ports:
+        - port: {{ .Values.rke2IngressNginx.metricsPort }}
+          protocol: TCP
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: rke2-ingress-nginx
+  policyTypes:
+    - Ingress
+{{- end }}
